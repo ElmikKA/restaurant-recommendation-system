@@ -1,13 +1,9 @@
 #This is gonna be main file where the logic will be written
-from data.food_type_choices import food_type_choices
 from data.location_choices import location_choices
 from data.location_food_choices import location_food_choices
 from functions.get_location import get_location
 from functions.get_restaurant_menu import show_restaurant_menu
-
-food_type_string = ""
-for key, food_type in food_type_choices.items():
-    food_type_string += "{0} - {1}\n".format(key, food_type)
+from functions.direction_indicator import direction_indicator
 
 location_choices_string = ""
 for key, location in location_choices.items(): 
@@ -40,7 +36,7 @@ def food_for_you():
         if user_input == "y": 
             show_restaurant_menu(location)
         else: 
-            print("This part of the code is still in making. Soon! ")
+            direction_indicator(location)
 
             
     show_food_types_of_city()
