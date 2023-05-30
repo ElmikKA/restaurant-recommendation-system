@@ -1,4 +1,4 @@
-food_type_choices = {
+restaurant_type_choices = {
     "a": "German", 
     "b": "Japanese",
     "c": "Vegetarian", 
