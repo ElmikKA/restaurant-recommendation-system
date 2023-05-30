@@ -6,7 +6,6 @@ def get_location():
 
     if location_letter in location_choices.keys(): 
         location = location_choices[location_letter]
-        print(location)
         return location 
     else: 
         print("Sorry, that's not a location we have data on. Let's try this again ...")
