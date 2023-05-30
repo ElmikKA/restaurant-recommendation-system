@@ -2,7 +2,8 @@
 from data.food_type_choices import food_type_choices
 from data.location_choices import location_choices
 from data.location_food_choices import location_food_choices
-from data.restaurant_menus import restaurant_menus
+from functions.get_location import get_location
+from functions.get_restaurant_menu import show_restaurant_menu
 
 food_type_string = ""
 for key, food_type in food_type_choices.items():
@@ -33,50 +34,14 @@ def food_for_you():
                 food_types_string += "{0} - {1}\n".format(keys, food_types)
 
         print("In {0} we have such food restaurants:\n{1}".format(location, food_types_string))
-        
-        show_restaurants_menu(location)    
-        
-    
-    def show_restaurants_menu(location): 
+        print("================")
+        user_input = input("Do you see where would you like to eat? Enter y/n: ")
 
-        restaurant_type = get_restaurant_type_choice(location)
-
-        if restaurant_type in restaurant_menus.keys():
-            print("=====================================")
-            for category, items in restaurant_menus[restaurant_type].items(): 
-                print(category + ":")
-                for item, price in items.items():
-                    print("- {0} - {1}$".format(item, str(price)))
+        if user_input == "y": 
+            show_restaurant_menu(location)
         else: 
-            print("Something went wrong, please try again!")
+            print("This part of the code is still in making. Soon! ")
 
-
-
-    def get_location():
-
-        location_letter = input("Where are you? Please enter a corresponding letter here: ")
-
-        if location_letter in location_choices.keys(): 
-            location = location_choices[location_letter]
-            print(location)
-            return location 
-        else: 
-            print("Sorry, that's not a location we have data on. Let's try this again ...")
-            get_location()
-         
-         
-    def get_restaurant_type_choice(location): 
-
-        restaurant_type_choice_letter = input("In what kind of restaurant would you like to eat? Please enter a corresponding letter here: ")
-
-        if restaurant_type_choice_letter in location_food_choices[location].keys(): 
-            restaurant_type_choice = location_food_choices[location][restaurant_type_choice_letter]
-            return restaurant_type_choice
-        else: 
-            print("Sorry thats not a restaurant we have data on. Let's try this again ...")
-            get_restaurant_type_choice()
-
-    
             
     show_food_types_of_city()
 
