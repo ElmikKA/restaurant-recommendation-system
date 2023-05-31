@@ -4,7 +4,7 @@ location_choices = {
     "b": "Tartu",
     "c": "Narva",
     "d": "Pärnu",
-    "e": "Kohtla-Järve",
+    "e": "Mustvee",
     "f": "Viljandi",
     "g": "Rakvere",
     "h": "Kuressaare",
