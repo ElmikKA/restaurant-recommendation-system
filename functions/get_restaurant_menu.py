@@ -1,10 +1,16 @@
 from data.restaurant_menus import restaurant_menus
 #If the import is from the same folder then you have to but "." infront of the file name 
-from .get_restaurant_type_choice import get_restaurant_type_choice
 
-def show_restaurant_menu(location): 
 
-    restaurant_type = get_restaurant_type_choice(location)
+def restauran_function(restaurant_type): 
+    
+    
+    show_restaurant_menu(restaurant_type)
+    user_input_for_yes_or_no = input("Do you see anything you would like to eat? Please type y/n: ")
+    food_picking(restaurant_type, user_input_for_yes_or_no)
+
+
+def show_restaurant_menu(restaurant_type): 
 
     if restaurant_type in restaurant_menus.keys():
         print("=====================================")
@@ -12,5 +18,33 @@ def show_restaurant_menu(location):
             print(category + ":")
             for item, price in items.items():
                 print("- {0} - {1}$".format(item, str(price)))
+
     else: 
         print("Something went wrong, please try again!")
+
+
+
+def food_picking(restaurant_type, user_input_for_yes_or_no, price = 0): 
+
+    if user_input_for_yes_or_no == "y": 
+        user_pick_of_food = input("Please write what would you like to eat: ")
+        user_pick_of_food_list = []
+        for items in restaurant_menus[restaurant_type].values():
+            for item in items.keys():
+                if item in user_pick_of_food: 
+                    user_pick_of_food_list.append(item)
+                    price += items[item]
+        does_user_want_more_food_to_order = input("Would you like to order more? Please type y/n: ")
+        if does_user_want_more_food_to_order == "y": 
+            price = food_picking(restaurant_type, user_input_for_yes_or_no, price)
+            print("Price: " + str(price))
+        else: 
+            print("You have chosen {0}".format(user_pick_of_food_list))
+            print("You have to pay us {0}".format(str(price)))
+
+    else: 
+        print()
+
+
+    return price
+
