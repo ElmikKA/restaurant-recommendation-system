@@ -4,8 +4,6 @@ from data.route_to_city import route_to_city
 from algorithms.graph_search import breath_first_search
 
 
-
-
 def direction_indicator(location): 
 
     restaurant_types_string = ""
@@ -31,13 +29,15 @@ def direction_indicator(location):
         print("You have chosen {0}".format(choice_of_city))
         shortest_route = get_route(location, choice_of_city)
         shortest_route_string = " -> ".join(shortest_route)
-        print("Here is the shortest route from {0} to {1} city: {2}".format(location, choice_of_city, shortest_route_string))
+        print("Here is the shortest route from {0} to {1} city: {0} -> {2} -> {1}".format(location, choice_of_city, shortest_route_string))
 
 
-    
 
 
-    
+
+
+
+        
 
 
 def get_restaurant_type_choice_for_directions(): 
@@ -77,13 +77,10 @@ def get_route(start_point, end_point):
             
             city_system = route_to_city
             route = breath_first_search(city_system, start_city, end_city)
-            print(route)
             if route is not None: 
                 routes.append(route)
-                print("Inside if statement" + str(routes))
     
     shortest_route = min(routes, key=len)
-    print(shortest_route)
     return shortest_route
 
 

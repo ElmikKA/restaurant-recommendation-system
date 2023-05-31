@@ -6,5 +6,6 @@ location_food_choices = {
     "Tartu":    {"a": "German", "b": "Japanese", "c": "Vegetarian", "d": "American", "f": "Barbecue", "g": "Czech", "h": "Chinese", "i": "Thai",
                     "j": "Mexican", "k": "Cafe", "l": "Pizza", "m": "Italian"},
     "Narva":    {"a": "Vegetarian", "b": "French", "c": "African", "d": "Barbecue", "f": "Czech", "g": "Chinese", "h": "Thai",
-                    "i": "Mexican", "j": "Cafe","k": "Pizza"}
+                    "i": "Mexican", "j": "Cafe","k": "Pizza"},
+    "Kuresaare": {"a": "German"}
 }
