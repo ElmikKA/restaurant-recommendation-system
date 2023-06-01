@@ -7,43 +7,27 @@ from .get_restaurant_menu import restauran_function
 
 def direction_indicator(location): 
 
-    restaurant_types_string = ""
-    for key, restaurant_types in restaurant_type_choices.items(): 
-        restaurant_types_string += "{0} - {1}\n".format(key, restaurant_types) 
-    
-    print("So here are all the restaurant types that we have in Estonia, please choose what kind of restaurant you would like to visit and we will direct you to the nearest restaurant of your choice:\n" + restaurant_types_string)
-
+    restaurant_types = get_restaurant_types()
+    print("So here are all the restaurant types that we have in Estonia, please choose what kind of restaurant you would like to visit and we will direct you to the nearest restaurant of your choice:\n" + restaurant_types)
     restaurant_type = get_restaurant_type_choice_for_directions()
-
     nearest_citys_that_have_restaurant = citys_that_have_restaurant_of_users_choice(restaurant_type)
-    
-
-    citys_names = ""
-    for city_name in nearest_citys_that_have_restaurant: 
-        
-        citys_names += "# - {0}\n".format(city_name)
-    
+    citys_names = get_nearest_citys_that_have_users_picked_restaurant(restaurant_type)
     print("So we found " + str(len(nearest_citys_that_have_restaurant)) + " citys near you, that have {0} restaurants!\n{1}".format(restaurant_type, citys_names))
     choice_of_city = input("So tell us, which city would you like to go for a good {0} meal? Please enter a corresponding Citys Name: ".format(restaurant_type))
     
-    if choice_of_city in route_to_city.keys():
-        shortest_route = get_route(location, choice_of_city)
-        shortest_route_string = " -> ".join(shortest_route)
-        print("=====================")
-        print("Here is the shortest route from {0} to {1} city: {0} -> {2} -> {1}".format(location, choice_of_city, shortest_route_string))
+    chosen_city = shortest_route_to_picked_city(choice_of_city, location)
+    print("Here is the shortest route from {0} to {1} city: {0} -> {2} -> {1}".format(location, choice_of_city, chosen_city))
 
-    
-    
     print("Now that you have your choice of restaurant and know how to get there, here is {0} restaurant menu: ".format(restaurant_type))
     restauran_function(restaurant_type)
 
+def get_restaurant_types(): 
+    
+    restaurant_types_string = ""
+    for key, restaurant_types in restaurant_type_choices.items(): 
+        restaurant_types_string += "{0} - {1}\n".format(key, restaurant_types) 
 
-
-
-
-
-        
-
+    return restaurant_types_string
 
 def get_restaurant_type_choice_for_directions(): 
 
@@ -58,6 +42,17 @@ def get_restaurant_type_choice_for_directions():
         get_restaurant_type_choice_for_directions()
 
 
+def get_nearest_citys_that_have_users_picked_restaurant(restaurant_type): 
+
+    nearest_citys_that_have_restaurant = citys_that_have_restaurant_of_users_choice(restaurant_type)
+
+    citys_names = ""
+    for city_name in nearest_citys_that_have_restaurant: 
+        citys_names += "# - {0}\n".format(city_name)
+    
+    return citys_names
+
+
 def citys_that_have_restaurant_of_users_choice(restaurant_type_for_directions): 
 
     list_of_citys = []
@@ -69,6 +64,15 @@ def citys_that_have_restaurant_of_users_choice(restaurant_type_for_directions):
     
     return list_of_citys
 
+def shortest_route_to_picked_city(choice_of_city, location): 
+
+    shortest_route_string = ""
+    if choice_of_city in route_to_city.keys(): 
+        shortest_route = get_route(location, choice_of_city)
+        shortest_route_string += " -> ".join(shortest_route)
+        print("=====================")
+    return shortest_route_string
+        
 
 def get_route(start_point, end_point):
 
@@ -77,9 +81,7 @@ def get_route(start_point, end_point):
     routes = []
 
     for start_city in start_citys: 
-        
         for end_city in end_citys: 
-            
             city_system = route_to_city
             route = breath_first_search(city_system, start_city, end_city)
             if route is not None: 
