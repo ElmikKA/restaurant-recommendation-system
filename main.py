@@ -2,7 +2,7 @@
 from data.location_choices import location_choices
 from data.location_food_choices import location_food_choices
 from functions.get_location import get_location
-from functions.get_restaurant_menu import show_restaurant_menu
+from functions.get_restaurant_menu import restauran_function
 from functions.direction_indicator import direction_indicator
 
 location_choices_string = ""
@@ -37,13 +37,17 @@ def food_for_you():
         food_types_string = ""
         for keys, food_types in location_food_choices[location].items(): 
                 food_types_string += "{0} - {1}\n".format(keys, food_types)
-
+        
         print("In {0} we have such food restaurants:\n{1}".format(location, food_types_string))
         print("================")
         user_input = input("Do you see where would you like to eat? Enter y/n: ")
 
+
+
         if user_input == "y": 
-            show_restaurant_menu(location)
+            restaurant_type_input = input("Please pick a restaurant. Choose the corresponding letter: ")
+            retsaurant_type = location_food_choices[location][restaurant_type_input]
+            restauran_function(retsaurant_type)
         else: 
             direction_indicator(location)
 

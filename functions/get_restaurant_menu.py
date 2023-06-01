@@ -1,13 +1,12 @@
 from data.restaurant_menus import restaurant_menus
 #If the import is from the same folder then you have to but "." infront of the file name 
-
+from .goodbye_script import goodbye_script
 
 def restauran_function(restaurant_type): 
     
-    
     show_restaurant_menu(restaurant_type)
     user_input_for_yes_or_no = input("Do you see anything you would like to eat? Please type y/n: ")
-    food_picking(restaurant_type, user_input_for_yes_or_no)
+    food_picking(restaurant_type,  user_input_for_yes_or_no)
 
 
 def show_restaurant_menu(restaurant_type): 
@@ -24,7 +23,7 @@ def show_restaurant_menu(restaurant_type):
 
 
 
-def food_picking(restaurant_type, user_input_for_yes_or_no, price = 0): 
+def food_picking(restaurant_type, user_input_for_yes_or_no, price = 0,): 
 
     if user_input_for_yes_or_no == "y": 
         user_pick_of_food = input("Please write what would you like to eat: ")
@@ -43,7 +42,12 @@ def food_picking(restaurant_type, user_input_for_yes_or_no, price = 0):
             print("You have to pay us {0}".format(str(price)))
 
     else: 
-        print()
+        if_user_picks_no = input("Would you like to see other restaurant choices again? Please type y/n: ")
+        if if_user_picks_no == "Y": 
+            #direction_indicator(location)
+            pass
+        else: 
+            goodbye_script()
 
 
     return price
