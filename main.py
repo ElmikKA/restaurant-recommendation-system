@@ -4,26 +4,7 @@ from data.location_food_choices import location_food_choices
 from functions.get_location import get_location
 from functions.get_restaurant_menu import restauran_function
 from functions.direction_indicator import direction_indicator
-
-location_choices_string = ""
-for key, location in location_choices.items(): 
-    location_choices_string += "{0} - {1}\n".format(key, location)
-
-
-def greeting(): 
-    welcome_logo = """
- __      __       .__                                ___________      ___________               .___ ___________            _____.___.            ._. 
-/  \    /  \ ____ |  |   ____  ____   _____   ____   \__    ___/___   \_   _____/___   ____   __| _/ \_   _____/__________  \__  |   | ____  __ __| | 
-\   \/\/   // __ \|  | _/ ___\/  _ \ /     \_/ __ \    |    | /  _ \   |    __)/  _ \ /  _ \ / __ |   |    __)/  _ \_  __ \  /   |   |/  _ \|  |  \ | 
- \        /\  ___/|  |_\  \__(  <_> )  Y Y  \  ___/    |    |(  <_> )  |     \(  <_> |  <_> ) /_/ |   |     \(  <_> )  | \/  \____   (  <_> )  |  /\| 
-  \__/\  /  \___  >____/\___  >____/|__|_|  /\___  >   |____| \____/   \___  / \____/ \____/\____ |   \___  / \____/|__|     / ______|\____/|____/ __ 
-       \/       \/          \/            \/     \/                        \/                    \/       \/                 \/                    \/
-        """
-    print(welcome_logo)
-    print("Hello and welcome to the Food For You!")
-    print("In here you can find food for your taste and even have it located for you!!!!!")
-    print("Please tell us where are you located:\n" + location_choices_string)
-
+from functions.greeting_script import greeting
 
 
 def food_for_you(): 
@@ -48,8 +29,10 @@ def food_for_you():
             restaurant_type_input = input("Please pick a restaurant. Choose the corresponding letter: ")
             retsaurant_type = location_food_choices[location][restaurant_type_input]
             restauran_function(retsaurant_type)
-        else: 
+        elif user_input == "n": 
             direction_indicator(location)
+        else: 
+             print("Something went wrong, please try again and try to input a correct letter!")
 
             
     show_food_types_of_city()
