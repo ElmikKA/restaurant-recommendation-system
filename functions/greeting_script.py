@@ -3,10 +3,7 @@ from data.location_choices import location_choices
 
 def greeting(): 
 
-    location_choices_string = ""
-    for key, location in location_choices.items(): 
-        location_choices_string += "{0} - {1}\n".format(key, location)
-    
+    location_choices = show_location_choices()
     welcome_logo = """
  __      __       .__                                ___________      ___________               .___ ___________            _____.___.            ._. 
 /  \    /  \ ____ |  |   ____  ____   _____   ____   \__    ___/___   \_   _____/___   ____   __| _/ \_   _____/__________  \__  |   | ____  __ __| | 
@@ -18,4 +15,12 @@ def greeting():
     print(welcome_logo)
     print("Hello and welcome to the Food For You!")
     print("In here you can find food for your taste and even have it located for you!!!!!")
-    print("Please tell us where are you located:\n" + location_choices_string)
+    print("Please tell us where are you located:\n" + location_choices)
+
+def show_location_choices(): 
+
+    location_choices_string = ""
+    for key, location in location_choices.items(): 
+        location_choices_string += "{0} - {1}\n".format(key, location)
+
+    return location_choices_string
